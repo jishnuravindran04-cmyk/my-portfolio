@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Portfolio</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap"
+        rel="stylesheet" />
+    <style>
+        :root {
+            --bg: #030014;
+            --surface: rgba(255, 255, 255, 0.05);
+            --card: rgba(255, 255, 255, 0.03);
+            --accent: #a855f7;
+            --accent-glow: rgba(168, 85, 247, 0.5);
+            --secondary: #06b6d4;
+            --text: #ffffff;
+            --muted: #a1a1aa;
+            --border: rgba(255, 255, 255, 0.1);
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-blur: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 300;
+            line-height: 1.7;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Fun Background Elements */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at 20% 30%, rgba(124, 58, 237, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(6, 182, 212, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(244, 63, 94, 0.1) 0%, transparent 50%);
+            z-index: -1;
+            filter: blur(80px);
+        }
+
+        /* NAV */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            padding: 1.2rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--glass-bg);
+            backdrop-filter: blur(var(--glass-blur));
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: var(--accent);
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 0.85rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 8rem 3rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -200px;
+            right: -200px;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 20s infinite alternate linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            100% {
+                transform: translate(-100px, 50px) scale(1.1);
+            }
+        }
+
+        .hero-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            width: 100%;
+            z-index: 1;
+        }
+
+        .hero-tag {
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .hero-tag::before {
+            content: '';
+            display: inline-block;
+            width: 40px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), var(--secondary));
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3.5rem, 8vw, 7rem);
+            line-height: 1.05;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #fff 0%, #a1a1aa 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero h1 span {
+            display: block;
+            background: linear-gradient(90deg, var(--accent), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px var(--accent-glow);
+        }
+
+        .hero-desc {
+            font-size: 1.2rem;
+            color: var(--muted);
+            max-width: 550px;
+            margin-bottom: 3rem;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.85rem 2rem;
+            border-radius: 2px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent), var(--secondary));
+            color: #fff;
+            border: none;
+            font-weight: 500;
+            box-shadow: 0 10px 20px -10px var(--accent-glow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px -10px var(--accent-glow);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--border);
+            backdrop-filter: blur(5px);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--secondary);
+            color: var(--secondary);
+            background: rgba(6, 182, 212, 0.05);
+        }
+
+        /* SECTIONS */
+        section {
+            padding: 6rem 3rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-size: 0.7rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            margin-bottom: 3rem;
+        }
+
+        .divider {
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, var(--border), transparent);
+            margin: 0 auto;
+        }
+
+        /* ABOUT */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .about-photo {
+            aspect-ratio: 3/4;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--muted);
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(var(--glass-blur));
+        }
+
+        .about-photo::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.1), transparent);
+        }
+
+        .photo-placeholder {
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .about-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 2px;
+        }
+
+        .photo-placeholder .icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 2px;
+        }
+
+        .about-text p {
+            color: var(--muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .info-list {
+            list-style: none;
+            margin-top: 2rem;
+        }
+
+        .info-list li {
+            display: flex;
+            gap: 1rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.9rem;
+        }
+
+        .info-list .label {
+            color: var(--accent);
+            min-width: 100px;
+        }
+
+        /* EDUCATION */
+        .edu-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .edu-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(var(--glass-blur));
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.75rem 2rem;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 1.5rem;
+            align-items: start;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .edu-card:hover {
+            border-color: var(--accent);
+            transform: scale(1.02);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .edu-year {
+            font-size: 0.8rem;
+            color: var(--accent);
+            letter-spacing: 2px;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            padding-top: 4px;
+        }
+
+        .edu-card h3 {
+            font-size: 1.05rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .edu-card p {
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        .edu-badge {
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(6, 182, 212, 0.2));
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.75rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            white-space: nowrap;
+            align-self: start;
+        }
+
+        /* HOBBIES */
+        .hobbies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1rem;
+        }
+
+        .hobby-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(var(--glass-blur));
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+        }
+
+        .hobby-card:hover {
+            border-color: var(--secondary);
+            transform: translateY(-10px) rotate(3deg);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .hobby-icon {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .hobby-card h3 {
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        /* ACHIEVEMENTS */
+        .ach-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .ach-item {
+            background: var(--glass-bg);
+            backdrop-filter: blur(var(--glass-blur));
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--accent);
+            padding: 1.25rem 1.75rem;
+            border-radius: 0 16px 16px 0;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .ach-item:hover {
+            transform: translateX(10px);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .ach-icon {
+            font-size: 1.5rem;
+        }
+
+        .ach-item h3 {
+            font-size: 0.95rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .ach-item p {
+            color: var(--muted);
+            font-size: 0.85rem;
+        }
+
+        /* CERTIFICATES */
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .cert-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(var(--glass-blur));
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .cert-card:hover {
+            border-color: var(--secondary);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px -5px rgba(6, 182, 212, 0.2);
+        }
+
+        .cert-card h3 {
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .cert-card p {
+            color: var(--muted);
+            font-size: 0.82rem;
+        }
+
+        .cert-issuer {
+            margin-top: 1rem;
+            font-size: 0.75rem;
+            color: var(--accent2);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* FRIENDS */
+        .friends-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .friend-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(var(--glass-blur));
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 1.5rem 1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .friend-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px) scale(1.05);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .friend-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            margin: 0 auto 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .friend-card h3 {
+            font-size: 0.9rem;
+        }
+
+        .friend-card p {
+            color: var(--muted);
+            font-size: 0.8rem;
+        }
+
+        /* FOOTER */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 2rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--muted);
+            font-size: 0.8rem;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .footer-social a {
+            color: var(--muted);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-social a:hover {
+            color: var(--accent);
+        }
+
+        /* ANIMATIONS */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-tag {
+            animation: fadeUp 0.6s ease forwards;
+        }
+
+        .hero h1 {
+            animation: fadeUp 0.6s 0.1s ease forwards;
+            opacity: 0;
+        }
+
+        .hero-desc {
+            animation: fadeUp 0.6s 0.2s ease forwards;
+            opacity: 0;
+        }
+
+        .hero-btns {
+            animation: fadeUp 0.6s 0.3s ease forwards;
+            opacity: 0;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 1.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            section {
+                padding: 4rem 1.5rem;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            footer {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAV -->
+    <nav>
+        <div class="nav-logo">Jishnu Ravindran</div>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#hobbies">Hobbies</a></li>
+            <li><a href="#achievements">Achievements</a></li>
+            <li><a href="#certificates">Certificates</a></li>
+            <li><a href="#friends">Friends</a></li>
+        </ul>
+    </nav>
+
+    <!-- HERO -->
+    <div class="hero">
+        <div class="hero-inner">
+            <div class="hero-tag">Portfolio · 2026</div>
+            <h1>Hello, I'm<br /><span>Jishnu Ravindran</span></h1>
+            <p class="hero-desc">
+                Data Science Student · Aspiring Analyst · Tech Enthusiast. Based in Kerala, India.
+                Passionate about Predictive Analytics, Machine Learning, and turning data into stories.
+            </p>
+            <div class="hero-btns">
+                <a href="#about" class="btn btn-primary">Know Me</a>
+                <a href="#certificates" class="btn btn-outline">My Work</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ABOUT -->
+    <section id="about">
+        <div class="about-grid">
+            <div>
+                <div class="section-label">Who I Am</div>
+                <h2 class="section-title">About Me</h2>
+                <!-- My Photo -->
+                <div class="about-photo">
+                    <div class="photo-placeholder">
+                        <img src="my%20photo.jpeg" alt="Jishnu Ravindran">
+                    </div>
+                </div>
+            </div>
+            <div class="about-text">
+                <p>
+                    I'm a dedicated graduate student pursuing my M.Sc. in Data Science
+                    at Digital University Kerala (DUK). I specialize in Predictive
+                    Analytics and have a strong foundation in Database Architecture.
+                </p>
+                <p>
+                    My journey in tech began with a fascination for how data can
+                    be used to solve complex real-world problems. Since then,
+                    I've been honing my skills in Python and statistical modeling.
+                </p>
+                <ul class="info-list">
+                    <li><span class="label">Name</span> Jishnu Ravindran</li>
+                    <li><span class="label">University</span> Digital University Kerala (DUK)</li>
+                    <li><span class="label">Course</span> M.Sc. Data Science</li>
+                    <li><span class="label">Year</span> 1st Year (Semester 2)</li>
+                    <li><span class="label">Location</span> Kerala, India</li>
+                    <li><span class="label">Email</span> jishnuravindran04@gmail.com</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- EDUCATION -->
+    <section id="education">
+        <div class="section-label">Academic Background</div>
+        <h2 class="section-title">Education</h2>
+        <div class="edu-timeline">
+            <div class="edu-card">
+                <div class="edu-year">2024</div>
+                <div>
+                    <h3>M.Sc. Data Science — Predictive Analytics</h3>
+                    <p>Digital University Kerala (DUK), Thiruvananthapuram</p>
+                </div>
+                <div class="edu-badge">Ongoing</div>
+            </div>
+            <div class="edu-card">
+                <div class="edu-year">2025</div>
+                <div>
+                    <h3>B.Sc. Physics</h3>
+                    <p>MES Kalladi College, Mannarkkad</p>
+                </div>
+                <div class="edu-badge">Completed</div>
+            </div>
+            <div class="edu-card">
+                <div class="edu-year">2022</div>
+                <div>
+                    <h3>Higher Secondary (Class XII)</h3>
+                    <p>HSS Sreekrishnapuram · Computer Science</p>
+                </div>
+                <div class="edu-badge">94%</div>
+            </div>
+            <div class="edu-card">
+                <div class="edu-year">2020</div>
+                <div>
+                    <h3>SSLC (Class X)</h3>
+                    <p>HSS Sreekrishnapuram</p>
+                </div>
+                <div class="edu-badge">96%</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- HOBBIES -->
+    <section id="hobbies">
+        <div class="section-label">What I Love</div>
+        <h2 class="section-title">Hobbies</h2>
+        <div class="hobbies-grid">
+            <div class="hobby-card">
+                <div class="hobby-icon">💻</div>
+                <h3>Coding</h3>
+            </div>
+            <div class="hobby-card">
+                <div class="hobby-icon">📚</div>
+                <h3>Reading</h3>
+            </div>
+            <div class="hobby-card">
+                <div class="hobby-icon">🎮</div>
+                <h3>Gaming</h3>
+            </div>
+            <div class="hobby-card">
+                <div class="hobby-icon">📷</div>
+                <h3>Photography</h3>
+            </div>
+            <div class="hobby-card">
+                <div class="hobby-icon">🎵</div>
+                <h3>Music</h3>
+            </div>
+            <div class="hobby-card">
+                <div class="hobby-icon">✈️</div>
+                <h3>Travel</h3>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ACHIEVEMENTS -->
+    <section id="achievements">
+        <div class="section-label">Milestones</div>
+        <h2 class="section-title">Achievements</h2>
+        <div class="ach-list">
+            <div class="ach-item">
+                <div class="ach-icon">🏆</div>
+                <div>
+                    <h3>Smart Passenger Allocation & Compartment Evaluation — DACE</h3>
+                    <p>Working on an app to detect crowd levels in general train compartments.</p>
+                </div>
+            </div>
+            <div class="ach-item">
+                <div class="ach-icon">🎖️</div>
+                <div>
+                    <h3>Database Architecture Specialist</h3>
+                    <p>Completed advanced assignments in Database Architecture and Analysis.
+                    </p>
+                </div>
+            </div>
+            <div class="ach-item">
+                <div class="ach-icon">🌟</div>
+                <div>
+                    <h3>Events Dataset Analytics</h3>
+                    <p>Performed deep exploratory data analysis on various event datasets using SQL</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- CERTIFICATES -->
+    <section id="certificates">
+        <div class="section-label">Credentials</div>
+        <h2 class="section-title">Certificates</h2>
+        <div class="cert-grid">
+            <div class="cert-card">
+                <h3>Python Programming for Data Analytics</h3>
+                <p>Mastered core concepts of Python, including OOP, file handling, and data structures for DS.</p>
+                <div class="cert-issuer">DUK · 2025</div>
+            </div>
+            <div class="cert-card">
+                <h3>Predictive Analytics</h3>
+                <p>Learned statistical modeling and machine learning techniques for data prediction.</p>
+                <div class="cert-issuer">DUK · 2025</div>
+            </div>
+            <div class="cert-card">
+                <h3>Database Architecture</h3>
+                <p>Understanding of SQL, NoSQL, and efficient data storage strategies.</p>
+                <div class="cert-issuer">DUK · 2025</div>
+            </div>
+            <div class="cert-card">
+                <h3>Computer Networks & Cloud</h3>
+                <p>Fundamentals of computer organization, networks, and cloud computing principles.</p>
+                <div class="cert-issuer">DUK · 2025</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- FRIENDS -->
+    <section id="friends">
+        <div class="section-label">My Circle</div>
+        <h2 class="section-title">Friends</h2>
+        <div class="friends-grid">
+            <div class="friend-card">
+                <div class="friend-avatar">👨‍💻</div>
+                <h3>Sebin</h3>
+                <p>Classmate · DUK</p>
+            </div>
+            <div class="friend-card">
+                <div class="friend-avatar">📊</div>
+                <h3>Abhi</h3>
+                <p>Study Buddy · DUK</p>
+            </div>
+            <div class="friend-card">
+                <div class="friend-avatar">🚀</div>
+                <h3>Hari</h3>
+                <p>Project Partner · DUK</p>
+            </div>
+            <div class="friend-card">
+                <div class="friend-avatar">💡</div>
+                <h3>Muhammed Khaise</h3>
+                <p>Mentor / Lead</p>
+            </div>
+            <div class="friend-card">
+                <div class="friend-avatar">💡</div>
+                <h3>Keerthana V K</h3>
+                <p>Best Friend ·DUK</p>
+            </div>
+            <div class="friend-card">
+                <div class="friend-avatar">💡</div>
+                <h3>Anusree S</h3>
+                <p>Best Friend ·DUK</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div>© 2026 Jishnu Ravindran. All rights reserved.</div>
+        <div class="footer-social">
+            <a href="https://github.com/jishnuravindran04-cmyk" target="_blank">GitHub</a>
+            <a href="https://www.linkedin.com/in/jishnuravindran" target="_blank">LinkedIn</a>
+            <a href="mailto:jishnuravindran04@gmail.com">Email</a>
+        </div>
+    </footer>
+
+</body>
+
+</html>
